@@ -54,6 +54,22 @@ export function runCommand(args: any) {
             }
             vscode.commands.executeCommand(command, vscode.Uri.parse(rest[0]));
             break;
+        case 'revealInExplorer':
+            if (!rest[0]) {
+                vscode.commands.executeCommand('revealInExplorer');
+                break;
+            }
+            {
+                const projectPath: string = vscode.workspace.rootPath || '';
+                let target: string;
+                if (rest[1] !== 'external' && !!projectPath) {
+                    target = process.platform === 'win32' ? `${projectPath}\\${rest[0]}` : `${projectPath}/${rest[0]}`;
+                } else {
+                    target = rest[0];
+                }
+                vscode.commands.executeCommand('revealInExplorer', vscode.Uri.file(target));
+            }
+            break;
         default:
             vscode.commands.executeCommand(command, ...rest);
     }

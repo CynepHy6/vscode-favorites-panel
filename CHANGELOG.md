@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.4.2 | 2026/06/06
+- Added `revealInExplorer` support in `runCommand` with workspace-relative paths.
+
 ## 1.4.1 | 2023/03/30
 - Fixed Error.
 

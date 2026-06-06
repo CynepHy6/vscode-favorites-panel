@@ -326,6 +326,35 @@ Settings for running arbitrary commands
   "arguments": ["editor.action.fontZoomIn"],
 }
 ```
+
+#### Reveal folder in Explorer
+command: revealInExplorer
+
+The built-in `revealInExplorer` command expects a `Uri`, not a relative path string.
+This extension resolves workspace-relative paths automatically (same rules as `openFile`).
+
+```json
+{
+  "label": "_work",
+  "description": "",
+  "icon": "symbol-folder",
+  "command": "runCommand",
+  "arguments": ["revealInExplorer", "_work"]
+}
+```
+
+For an absolute path outside the workspace, pass `"external"` as the second argument:
+
+```json
+{
+  "label": "Hosts",
+  "description": "",
+  "icon": "symbol-folder",
+  "command": "runCommand",
+  "arguments": ["revealInExplorer", "/etc/hosts", "external"]
+}
+```
+
 #### Open Search panel
 command: workbench.action.findInFiles
 arguments:
