@@ -135,7 +135,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.registerTreeDataProvider('favoritesPanelExplorer', favoritesPanelProvider);
     vscode.commands.registerCommand(`${PLUGIN_NAME}.refreshPanel`, () => favoritesPanelProvider.refresh());
     vscode.commands.registerCommand(`${PLUGIN_NAME}.openFavoritesPanelSettings`, () => {
-        runCommand(['workbench.action.openSettings', `@ext:hy6.favorites-panel`]);
+        runCommand(['workbench.action.openSettings', `@ext:hy6.favorites-panel-fork`]);
     }),
         vscode.commands.registerCommand(`${PLUGIN_NAME}.openUserJsonSettings`, () => {
             runCommand(['workbench.action.openSettingsJson']);
