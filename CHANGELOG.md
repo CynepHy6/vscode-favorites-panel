@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.4.3 | 2026/06/07
+- Forked and published as `favorites-panel-fork` by hy6.
+- Fixed editor freezing when clicking the settings icon.
+- Replaced deprecated `rootPath` API with `workspaceFolders` for better stability.
+- Improved cross-platform compatibility for file paths on Windows, macOS, and Linux using `path.join`.
+- Cleaned up unused comments and TypeScript configuration settings.
+
 ## 1.4.2 | 2026/06/06
 - Added `revealInExplorer` support in `runCommand` with workspace-relative paths.
 

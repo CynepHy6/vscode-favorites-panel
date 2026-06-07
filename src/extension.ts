@@ -131,40 +131,40 @@ export const getCommandsForTree = () => {
 // Commands activations/
 export function activate(context: vscode.ExtensionContext) {
     const favoritesPanelProvider = new FavoritesPanelProvider(getCommandsForTree());
-    vscode.window.registerTreeDataProvider('favoritesPanel', favoritesPanelProvider);
-    vscode.window.registerTreeDataProvider('favoritesPanelExplorer', favoritesPanelProvider);
-    vscode.commands.registerCommand(`${PLUGIN_NAME}.refreshPanel`, () => favoritesPanelProvider.refresh());
-    vscode.commands.registerCommand(`${PLUGIN_NAME}.openFavoritesPanelSettings`, () => {
-        runCommand(['workbench.action.openSettings', `@ext:hy6.favorites-panel-fork`]);
-    }),
+
+    context.subscriptions.push(
+        vscode.window.registerTreeDataProvider('favoritesPanel', favoritesPanelProvider),
+        vscode.window.registerTreeDataProvider('favoritesPanelExplorer', favoritesPanelProvider),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.refreshPanel`, () => favoritesPanelProvider.refresh()),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.openFavoritesPanelSettings`, () => {
+            runCommand(['workbench.action.openSettings', '@ext:hy6.favorites-panel-fork']);
+        }),
         vscode.commands.registerCommand(`${PLUGIN_NAME}.openUserJsonSettings`, () => {
             runCommand(['workbench.action.openSettingsJson']);
         }),
         vscode.commands.registerCommand(`${PLUGIN_NAME}.openWorkspaceJsonSettings`, () => {
             runCommand(['workbench.action.openWorkspaceSettingsFile']);
         }),
-
-        context.subscriptions.push(
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.openFile`, (args) => {
-                openFile(args);
-            }),
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.run`, (args) => {
-                runProgram(args[0]);
-            }),
-            // DEPRECATED
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.openUrl`, (args) => {
-                openUrl(args);
-            }),
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.runCommand`, (args) => {
-                runCommand(args);
-            }),
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.insertNewCode`, (args) => {
-                insertNewCode(args);
-            }),
-            vscode.commands.registerCommand(`${PLUGIN_NAME}.runSequence`, (args) => {
-                runSequence(args);
-            })
-        );
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.openFile`, (args) => {
+            openFile(args);
+        }),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.run`, (args) => {
+            runProgram(args[0]);
+        }),
+        // DEPRECATED
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.openUrl`, (args) => {
+            openUrl(args);
+        }),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.runCommand`, (args) => {
+            runCommand(args);
+        }),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.insertNewCode`, (args) => {
+            insertNewCode(args);
+        }),
+        vscode.commands.registerCommand(`${PLUGIN_NAME}.runSequence`, (args) => {
+            runSequence(args);
+        })
+    );
 
     // Open demo file of settings
     if (!store.commands.length) {

@@ -2,7 +2,7 @@
     "name": "favorites-panel-fork",
     "displayName": "Favorites Panel (Fork)",
     "description": "Use the extension to create a panel with your favorite commands, folders, files, URLs.",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "publisher": "hy6",
     "author": {
         "name": "hy6"
