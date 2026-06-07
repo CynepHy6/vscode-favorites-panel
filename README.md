@@ -1,5 +1,5 @@
 
-[![Version](https://img.shields.io/visual-studio-marketplace/v/sabitovvt.favorites-panel)](https://marketplace.visualstudio.com/items?itemName=sabitovvt.favorites-panel) [![Installs](https://img.shields.io/visual-studio-marketplace/i/sabitovvt.favorites-panel)](https://marketplace.visualstudio.com/items?itemName=sabitovvt.favorites-panel) [![Rating](https://img.shields.io/visual-studio-marketplace/r/sabitovvt.favorites-panel)](https://marketplace.visualstudio.com/items?itemName=sabitovvt.favorites-panel) [![OpenVSX Downloads](https://shields.io/open-vsx/dt/sabitovvt/favorites-panel?label=OpenVSX%20installs)](https://open-vsx.org/extension/sabitovvt/favorites-panel) [![Stars](https://img.shields.io/github/stars/sabitovvt/vscode-favorites-panel?logo=github)](https://github.com/sabitovvt/vscode-favorites-panel) [![Forks](https://img.shields.io/github/forks/sabitovvt/vscode-favorites-panel?logo=github)](https://github.com/sabitovvt/vscode-favorites-panel)
+
 
 # Favorites Panel
 
@@ -623,3 +623,10 @@ Copy this snippet of settings into settings.json file (VS Code settings file) to
 - Fixed Error.
 
 More information in the [changelog](CHANGELOG.md "Changelog")
+
+---
+
+## Original Extension
+
+This extension is a fork of the original [Favorites Panel](https://github.com/sabitovvt/vscode-favorites-panel) extension developed by [Vladimir Sabitov](https://github.com/sabitovvt). All credits for the original idea and core implementation go to the original author.
+

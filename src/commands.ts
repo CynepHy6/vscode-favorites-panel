@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 import {ERRORS, INFORMATION} from './consts';
 import {errors} from './extension';
 import {ICommand} from './types';
@@ -15,12 +16,12 @@ export function runProgram(program: string) {
 
 // Open file
 export function openFile(args: any) {
-    const projectPath: string = vscode.workspace.rootPath || '';
+    const projectPath: string = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
 
     let document: string;
 
     if (args[1] !== 'external' && !!projectPath) {
-        document = process.platform === 'win32' ? `${projectPath}\\${args[0]}` : `${projectPath}/${args[0]}`;
+        document = path.join(projectPath, args[0]);
     } else {
         document = args[0];
     }
@@ -60,10 +61,10 @@ export function runCommand(args: any) {
                 break;
             }
             {
-                const projectPath: string = vscode.workspace.rootPath || '';
+                const projectPath: string = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
                 let target: string;
                 if (rest[1] !== 'external' && !!projectPath) {
-                    target = process.platform === 'win32' ? `${projectPath}\\${rest[0]}` : `${projectPath}/${rest[0]}`;
+                    target = path.join(projectPath, rest[0]);
                 } else {
                     target = rest[0];
                 }
@@ -80,8 +81,8 @@ export function runCommand(args: any) {
 // Add code to file
 export function insertNewCode(args: any) {
     const [file, searchPattern, newCode, action = 'before'] = args;
-    const projectPath: string = vscode.workspace.rootPath || '';
-    const document: string = `${projectPath}\\${file}`;
+    const projectPath: string = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
+    const document: string = path.join(projectPath, file);
     vscode.workspace.openTextDocument(document).then(
         (doc) => {
             vscode.window.showTextDocument(doc).then(() => {

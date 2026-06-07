@@ -103,12 +103,11 @@ export const getCommandsForTree = () => {
     ];
 
     if (workspaceFolders.length) {
-        workspaceFolders.forEach((filder) => {
-            const vscodeFolder = process.platform === 'win32' ? '\\.vscode\\' : '/.vscode/';
-            commands.push(...getCommandsFromFile(path.join(filder, `${vscodeFolder}favoritesPanel.json`)));
+        workspaceFolders.forEach((folder) => {
+            commands.push(...getCommandsFromFile(path.join(folder, '.vscode', 'favoritesPanel.json')));
             commands.push(
-                ...getCommandsFromFile(path.join(filder, '.favoritesPanel.json')),
-                ...getCommandsFromFile(path.join(filder, 'favoritesPanel.json'))
+                ...getCommandsFromFile(path.join(folder, '.favoritesPanel.json')),
+                ...getCommandsFromFile(path.join(folder, 'favoritesPanel.json'))
             );
         });
     }
@@ -136,7 +135,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.registerTreeDataProvider('favoritesPanelExplorer', favoritesPanelProvider);
     vscode.commands.registerCommand(`${PLUGIN_NAME}.refreshPanel`, () => favoritesPanelProvider.refresh());
     vscode.commands.registerCommand(`${PLUGIN_NAME}.openFavoritesPanelSettings`, () => {
-        runCommand(['workbench.action.openSettings', `@ext:sabitovvt.favorites-panel`]);
+        runCommand(['workbench.action.openSettings', `@ext:hy6.favorites-panel`]);
     }),
         vscode.commands.registerCommand(`${PLUGIN_NAME}.openUserJsonSettings`, () => {
             runCommand(['workbench.action.openSettingsJson']);
@@ -169,8 +168,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Open demo file of settings
     if (!store.commands.length) {
-        const path = process.platform === 'win32' ? '\\resources\\' : '/resources/';
-        openFile([`${context.extensionPath}${path}demosettings.json`, 'external']);
+        openFile([path.join(context.extensionPath, 'resources', 'demosettings.json'), 'external']);
     }
 }
 
