@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.4.5 | 2026/06/07
+- Fixed empty lines being inserted in settings.json when opening settings from the panel toolbar.
+
+## 1.4.4 | 2026/06/07
+- Simplified panel toolbar: one button for user settings, one for workspace settings.
+- User settings (gear) opens `settings.json` at `favoritesPanel.commands` instead of the slow Settings UI search.
+- Workspace settings opens `.vscode/settings.json` at `favoritesPanel.commandsForWorkspace`.
+
 ## 1.4.3 | 2026/06/07
 - Forked and published as `favorites-panel-fork` by hy6.
 - Fixed editor freezing when clicking the settings icon.

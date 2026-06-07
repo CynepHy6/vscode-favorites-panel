@@ -2,7 +2,7 @@
     "name": "favorites-panel-fork",
     "displayName": "Favorites Panel (Fork)",
     "description": "Use the extension to create a panel with your favorite commands, folders, files, URLs.",
-    "version": "1.4.3",
+    "version": "1.4.5",
     "publisher": "hy6",
     "author": {
         "name": "hy6"
@@ -78,11 +78,6 @@
                     "group": "navigation"
                 },
                 {
-                    "command": "favoritesPanel.openUserJsonSettings",
-                    "when": "view == favoritesPanel || view == favoritesPanelExplorer",
-                    "group": "navigation"
-                },
-                {
                     "command": "favoritesPanel.openWorkspaceJsonSettings",
                     "when": "view == favoritesPanel || view == favoritesPanelExplorer",
                     "group": "navigation"
@@ -98,19 +93,18 @@
             },
             {
                 "command": "favoritesPanel.openFavoritesPanelSettings",
-                "title": "Open settings",
+                "title": "User settings",
                 "category": "Favorites Panel",
                 "icon": "$(gear)"
             },
             {
                 "command": "favoritesPanel.openUserJsonSettings",
                 "title": "User JSON settings",
-                "category": "Favorites Panel",
-                "icon": "$(file-code)"
+                "category": "Favorites Panel"
             },
             {
                 "command": "favoritesPanel.openWorkspaceJsonSettings",
-                "title": "Workspace JSON settings",
+                "title": "Workspace settings",
                 "category": "Favorites Panel",
                 "icon": "$(file-code)"
             }
