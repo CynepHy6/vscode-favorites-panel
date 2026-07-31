@@ -1,9 +1,6 @@
-
-
-
 # Favorites Panel
 
-The extension adds a panel for accessing frequently used commands, files, directories, URLs, programs, snippets. The panel can be standalone or as part of the Explorer (In this case, you can drag the panel like any other to the desired location).
+The extension adds a panel for accessing frequently used commands, files, directories, URLs, programs, snippets. The panel can be standalone or as part of the Explorer (in this case, you can drag the panel like any other to the desired location).
 
 ![Favorites Panel](preview/screenshot_0.png)
 
@@ -17,47 +14,28 @@ The extension adds a panel for accessing frequently used commands, files, direct
 - Setting icons for commands
 - Separation setting for different workspaces
 
+## Settings
 
-## Extension Settings
+Configure in VS Code settings (`settings.json`) under **`favoritesPanel.commands`**, or point to an external file via **`favoritesPanel.configPath`**.
 
-The extension requires initial configuration.
-Edit the settings file VSCODE.
-If extension settings are not specified, demo settings will be used.
+For workspace-specific lists use **`favoritesPanel.commandsForWorkspace`** / **`favoritesPanel.configPathForWorkspace`** in the *workspace* settings (not User settings).
 
-The extension settings are in section **"favoritesPanel.commands": []** in the Settings(settings.json)
-You can also place settings in custom files **favoritesPanel.configPath**
+If nothing is configured, demo settings are used.
 
-If you want to make specific settings for each workspace, then use **favoritesPanel.commandsForWorkspace** or
- **favoritesPanel.configPathForWorkspace**. in the workspace settings.
+Load order (all sources are merged):
 
-The order of loading and displaying the settings:
-- **Settings: favoritesPanel.commands**
-- **Settings: favoritesPanel.commandsForWorkspace**
-- **Settings: favoritesPanel.configPath: "full_path_to_custom_configuration_file"**
-- **Settings: favoritesPanel.configPathForWorkspace: "full_path_to_custom_configuration_file"**
-- **.vscode/favoritesPanel.json** in project folder
-- **.favoritesPanel.json** in project folder
-- **favoritesPanel.json** in project folder
+1. `favoritesPanel.commands`
+2. `favoritesPanel.commandsForWorkspace`
+3. `favoritesPanel.configPath`
+4. `favoritesPanel.configPathForWorkspace`
+5. `.vscode/favoritesPanel.json` in the project
+6. `.favoritesPanel.json` in the project
+7. `favoritesPanel.json` in the project
 
 ### favoritesPanel.commands
+
 ```json
 "favoritesPanel.commands": [
-    {
-        "label": "README",
-        "description": "- read me",
-        "icon": "zap",
-        "iconColor": "editorBracketHighlight.foreground5",
-        "command": "openFile",
-        "arguments": ["README.MD"]
-    }
-]
-```
-
-### favoritesPanel.commandsForWorkspace
-Use this setting if you wish to set specific settings for the workspace.
->Please note that you need to specify this setting in the workspace setting, not the User settings
-```json
-"favoritesPanel.commandsForWorkspace": [
     {
         "label": "README",
         "description": "- read me",
@@ -70,107 +48,17 @@ Use this setting if you wish to set specific settings for the workspace.
 ```
 
 ### favoritesPanel.configPath
-Example for OS Windows
+
+External file path. Since 1.4.0 the file may be either a plain array of commands or the older wrapper object `{ "favoritesPanel.commands": [ ... ] }`.
+
 ```json
 "favoritesPanel.configPath": "C:\\Projects\\favoritesPanel.json"
 ```
 
-Early versions of the extension prior to 1.3.0 only supported:
-```json
-{
-    "favoritesPanel.commands": [
-        {
-            "label": "README",
-            "description": " - Important!",
-            "command": "openFile",
-            "iconColor": "editorBracketHighlight.foreground6",
-            "arguments": ["README.MD"]
-        },
-        {
-            "label": "Hosts",
-            "description": "Windows hosts file",
-            "command": "openFile",
-            "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"],
-            "iconColor": "editorBracketHighlight.foreground5"
-        }
-    ]
-}
-```
-
-Since version 1.4.0 you can also use a simplified version:
-```json
-[
-    {
-        "label": "README",
-        "description": " - Important!",
-        "command": "openFile",
-        "iconColor": "editorBracketHighlight.foreground6",
-        "arguments": ["README.MD"]
-    },
-    {
-        "label": "Hosts",
-        "description": "Windows hosts file",
-        "command": "openFile",
-        "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"],
-        "iconColor": "editorBracketHighlight.foreground5"
-    }
-]
-```
-
-
-### favoritesPanel.configPathForWorkspace
-Use this setting if you wish to set specific settings for the workspace.
->Please note that you need to specify this setting in the workspace setting, not the User settings
-
-Example for OS Windows
-```json
-"favoritesPanel.configPathForWorkspace": "C:\\Projects\\Project1\\favoritesPanelForMyProject1.json"
-```
-
-Early versions of the extension prior to 1.3.0 only supported:
-```json
-{
-    "favoritesPanel.commands": [
-        {
-            "label": "README",
-            "description": " - Important!",
-            "command": "openFile",
-            "iconColor": "editorBracketHighlight.foreground6",
-            "arguments": ["README.MD"]
-        },
-        {
-            "label": "Hosts",
-            "description": "Windows hosts file",
-            "command": "openFile",
-            "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"],
-            "iconColor": "editorBracketHighlight.foreground5"
-        }
-    ]
-}
-```
-
-Since version 1.4.0 you can also use a simplified version:
-```json
-[
-    {
-        "label": "README",
-        "description": " - Important!",
-        "command": "openFile",
-        "iconColor": "editorBracketHighlight.foreground6",
-        "arguments": ["README.MD"]
-    },
-    {
-        "label": "Hosts",
-        "description": "Windows hosts file",
-        "command": "openFile",
-        "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"],
-        "iconColor": "editorBracketHighlight.foreground5"
-    }
-]
-```
-
 ### favoritesPanel.explorerView
-moves the "Favorites Panel" in the explorer view. This allows you to drag the panel to a different location. Examples are shown in the screenshots.
+
+Moves the panel into the Explorer view so you can drag it elsewhere.
+
 ```json
 "favoritesPanel.explorerView": true
 ```
@@ -179,282 +67,133 @@ Secondary Side Bar | Bottom Panel
 :-------------------------:|:-------------------------:
 ![Favorites Panel](preview/screenshot_1_1.png) | ![Favorites Panel](preview/screenshot_1_2.png)
 
-## Displayed command settings
-You must set the required parameter __label__.
-You can specify __description__, __icon__, __iconColor__.
+## Item fields
 
-Find the icon you need [here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing "icons").
+Required: **`label`**. Optional: **`description`**, **`icon`**, **`iconColor`**, **`command`** / **`arguments`**, **`sequence`**, or nested **`commands`** (group).
 
-The available colors of icon are listed in [here](https://code.visualstudio.com/docs/getstarted/theme-color-reference "Icon colors").
-> __Examples of colors:__
-> - editorBracketHighlight.foreground1
-> - editorBracketHighlight.foreground2
-> - editorBracketHighlight.foreground3
-> - editorBracketHighlight.foreground4
-> - editorBracketHighlight.foreground5
-> - editorBracketHighlight.foreground6
-> - terminal.ansiBlack: 'Black' ANSI color in the terminal.
-> - terminal.ansiBlue: 'Blue' ANSI color in the terminal.
-> - terminal.ansiBrightBlack: 'BrightBlack' ANSI color in the terminal.
-> - terminal.ansiBrightBlue: 'BrightBlue' ANSI color in the terminal.
-> - terminal.ansiBrightCyan: 'BrightCyan' ANSI color in the terminal.
-> - terminal.ansiBrightGreen: 'BrightGreen' ANSI color in the terminal.
-> - terminal.ansiBrightMagenta: 'BrightMagenta' ANSI color in the terminal.
-> - terminal.ansiBrightRed: 'BrightRed' ANSI color in the terminal.
-> - terminal.ansiBrightWhite: 'BrightWhite' ANSI color in the terminal.
-> - terminal.ansiBrightYellow: 'BrightYellow' ANSI color in the terminal.
-> - terminal.ansiCyan: 'Cyan' ANSI color in the terminal.
-> - terminal.ansiGreen: 'Green' ANSI color in the terminal.
-> - terminal.ansiMagenta: 'Magenta' ANSI color in the terminal.
-> - terminal.ansiRed: 'Red' ANSI color in the terminal.
-> - terminal.ansiWhite: 'White' ANSI color in the terminal.
-> - terminal.ansiYellow: 'Yellow' ANSI color in the terminal.
+- Icons: [codicon listing](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)
+- Colors: [theme color reference](https://code.visualstudio.com/docs/getstarted/theme-color-reference) (e.g. `editorBracketHighlight.foreground1`…`6`, `terminal.ansi*`)
 
-You can also define your own colors for use in the extension.
-You need to add to the Visual Studio Code settings:
-```js
-"workbench.colorCustomizations": {
-    "favoritesPanel.myColorGreen": "#006700",
-    "favoritesPanel.myColorBlue": "#000067"
-},
-```
+Custom colors via `workbench.colorCustomizations`:
 
-And in the extension settings specify:
 ```json
-{
-    "command": "openFile",
-    "icon": "file",
-    "iconColor": "favoritesPanel.myColorGreen",
-},
-{
-    "command": "openFile",
-    "icon": "file",
-    "iconColor": "favoritesPanel.myColorBlue",
-},
+"workbench.colorCustomizations": {
+    "favoritesPanel.myColorGreen": "#006700"
+}
 ```
 
+Then `"iconColor": "favoritesPanel.myColorGreen"` on an item.
 
-## Examples of using the plugin
+## Examples
 
-### Editing code
+### Transform selection
+
 ```json
 {
     "label": "lowercase ➜ UPPER CASE",
-    "description": "",
     "icon": "debug-step-out",
     "command": "runCommand",
-    "arguments": [
-        "editor.action.transformToUppercase"
-    ]
+    "arguments": ["editor.action.transformToUppercase"]
 }
 ```
-![Favorites Panel](preview/lowercase_to_uppercase.gif)
 
+### Open file (in project / external)
 
-### Opening file
-
-#### File in project
-
-Settings for opening file in project
+```json
+{ "label": "README", "command": "openFile", "arguments": ["README.MD"] }
+```
 
 ```json
 {
-    "label": "README",
-    "description": "- read me",
-    "command": "openFile",
-    "arguments": ["README.MD"]
+  "label": "Hosts",
+  "command": "openFile",
+  "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"]
 }
 ```
-#### File is out project 
 
-Settings for opening file in project
+### Run program / open folder (Windows)
 
 ```json
-    {
-      "label": "Hosts",
-      "description": "Windows hosts file",
-      "command": "openFile",
-      "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"]
-    }
+{ "label": "Chrome", "command": "run", "arguments": ["start chrome"] }
 ```
-### Run program
-
-Settings for run program
-
-#### Run Chrome in OS Windows
 
 ```json
-    {
-      "label": "Chrome",
-      "description": "Run Chrome",
-      "command": "run",
-      "arguments": ["start chrome"]
-    }
-```
-#### Open folder in OS Windows
-
-```json
-    {
-      "label": "Windows",
-      "description": "",
-      "command": "run",
-      "arguments": ["start explorer /n, C:\\Windows"]
-    }
+{ "label": "Windows", "command": "run", "arguments": ["start explorer /n, C:\\Windows"] }
 ```
 
 ### Open URL
 
-Settings for open URL
-
-```json
-    {
-      "label": "github.com",
-      "description": "",
-      "command": "runCommand",
-      "arguments": ["vscode.open", "https://github.com"],
-    }
-```
-### Run Command
-
-Settings for running arbitrary commands
-
 ```json
 {
-  "label": "Zoom In",
-  "description": "",
+  "label": "github.com",
   "command": "runCommand",
-  "arguments": ["editor.action.fontZoomIn"],
+  "arguments": ["vscode.open", "https://github.com"]
 }
 ```
 
-#### Reveal folder in Explorer
-command: revealInExplorer
+### Reveal folder in Explorer
 
-The built-in `revealInExplorer` command expects a `Uri`, not a relative path string.
-This extension resolves workspace-relative paths automatically (same rules as `openFile`).
+Workspace-relative paths are resolved like `openFile`. For an absolute path outside the workspace, pass `"external"`:
 
 ```json
 {
   "label": "_work",
-  "description": "",
   "icon": "symbol-folder",
   "command": "runCommand",
   "arguments": ["revealInExplorer", "_work"]
 }
 ```
 
-For an absolute path outside the workspace, pass `"external"` as the second argument:
-
-```json
-{
-  "label": "Hosts",
-  "description": "",
-  "icon": "symbol-folder",
-  "command": "runCommand",
-  "arguments": ["revealInExplorer", "/etc/hosts", "external"]
-}
-```
-
-#### Open Search panel
-command: workbench.action.findInFiles
-arguments:
-- query?: string;
-- isRegex?: boolean;
-- triggerSearch?: boolean;
-- filesToInclude?: string;
-- filesToExclude?: string;
-- isCaseSensitive?: boolean;
+### Find in files
 
 ```json
 {
   "label": "Find in files",
-  "description": "",
   "command": "runCommand",
-  "arguments": ["workbench.action.findInFiles", {"query": "SearchPattern", "triggerSearch": true}],
-},
-```
-
-#### Insert text
-Search and insert text by regexp pattern. Searches until the first match.
-
-```json
-{
-  "label": "Replace",
-  "description": "",
-  "icon": "find-replace",
-  "command": "insertNewCode",
-  "arguments": ["ui/components/tableItem.ts", "<td className=\"col-date-time\">", "<div className=\"new\">NewText</div>", "before"],
+  "arguments": ["workbench.action.findInFiles", {"query": "SearchPattern", "triggerSearch": true}]
 }
 ```
 
-#### Replace text
-Search and replace text by regexp pattern. Searches until the first match.
+### Insert / replace text (`insertNewCode`)
+
+Args: `[file, searchPattern, newCode, action]` where `action` is `before` (default), `replace`, or `replaceAll`.
 
 ```json
 {
   "label": "Replace",
-  "description": "",
   "icon": "find-replace",
   "command": "insertNewCode",
   "arguments": ["ui/components/tableItem.ts", "<td className=\"col-date-time\">", "<div className=\"WOW\"></div>", "replace"]
 }
 ```
 
-#### Replace All text
-Search and replace text by regexp pattern. Searches all match.
-
-```json
-{
-  "label": "ReplaceAll",
-  "description": "",
-  "icon": "find-replace",
-  "command": "insertNewCode",
-  "arguments": ["ui/components/tableItem.ts", "<td className=\"col-date-time\">", "<div className=\"WOW\"></div>", "replaceALL"]
-}
-```
-
 ### Sequence
-running multiple commands
 
 ```json
 {
     "label": "Sequence",
-    "description": " - Running multiple commands",
     "icon": "console",
     "sequence": [
+        { "command": "runCommand", "arguments": ["workbench.action.terminal.new"] },
+        { "command": "runCommand", "arguments": ["workbench.action.terminal.focus"] },
         {
             "command": "runCommand",
-            "arguments": ["workbench.action.terminal.new"]
-        },
-        {
-            "command": "runCommand",
-            "arguments": ["workbench.action.terminal.focus"]
-        },
-        {
-            "command": "runCommand",
-            "arguments": [
-                "workbench.action.terminal.renameWithArg",
-                {
-                    "name": "New Terminal"
-                }
-            ]
+            "arguments": ["workbench.action.terminal.renameWithArg", { "name": "New Terminal" }]
         },
         {
             "command": "runCommand",
             "arguments": [
                 "workbench.action.terminal.sendSequence",
-                {
-                    "text": "node -v\nnpm -v\ngit --version\n"
-                }
+                { "text": "node -v\nnpm -v\ngit --version\n" }
             ]
         }
     ]
 }
 ```
 
-### Settings for example:
+### Starter snippet
 
-Copy this snippet of settings into settings.json file (VS Code settings file) to see the extension in action.
+Copy into `settings.json`:
 
 ```json
 "favoritesPanel.commands": [
@@ -465,168 +204,45 @@ Copy this snippet of settings into settings.json file (VS Code settings file) to
         "arguments": ["README.MD"]
     },
     {
-        "label": "Hosts",
-        "description": "Windows hosts file",
-        "command": "openFile",
-        "arguments": ["C:\\Windows\\System32\\drivers\\etc\\hosts", "external"]
-    },
-    {
         "label": "EDIT",
         "commands": [
             {
                 "label": "lowercase ➜ UPPER CASE",
-                "description": "",
                 "icon": "debug-step-out",
                 "command": "runCommand",
                 "arguments": ["editor.action.transformToUppercase"]
-            },
-            {
-                "label": "UPPER CASE ➜ lowercase",
-                "description": "",
-                "icon": "debug-step-into",
-                "command": "runCommand",
-                "arguments": ["editor.action.transformToLowercase"]
-            },
-            {
-                "label": "var ➜ prop={prop}",
-                "description": "",
-                "icon": "symbol-namespace",
-                "command": "runCommand",
-                "arguments": [
-                    "editor.action.insertSnippet",
-                    {
-                        "snippet": "$TM_SELECTED_TEXT={$TM_SELECTED_TEXT}"
-                    }
-                ]
             }
         ]
-    },
-    {
-        "label": "Chrome",
-        "description": "Run Chrome",
-        "icon": "browser",
-        "command": "run",
-        "arguments": ["start chrome"]
     },
     {
         "label": "github.com",
-        "description": "",
         "icon": "link-external",
         "command": "runCommand",
         "arguments": ["vscode.open", "https://github.com"]
-    },
-    {
-        "label": "Windows folder",
-        "description": "Open Windows folder",
-        "icon": "symbol-folder",
-        "command": "run",
-        "arguments": ["start explorer /n, C:\\Windows"]
-    },
-    {
-        "label": "Find in files",
-        "description": "",
-        "icon": "search",
-        "command": "runCommand",
-        "arguments": ["workbench.action.findInFiles", {"query": "SearchPannern", "triggerSearch": true}]
-    },
-    {
-        "label": "Sequence",
-        "description": " - Running multiple commands",
-        "icon": "console",
-        "sequence": [
-            {
-                "command": "runCommand",
-                "arguments": ["workbench.action.terminal.new"]
-            },
-            {
-                "command": "runCommand",
-                "arguments": ["workbench.action.terminal.focus"]
-            },
-            {
-                "command": "runCommand",
-                "arguments": [
-                    "workbench.action.terminal.renameWithArg",
-                    {
-                        "name": "New Terminal"
-                    }
-                ]
-            },
-            {
-                "command": "runCommand",
-                "arguments": [
-                    "workbench.action.terminal.sendSequence",
-                    {
-                        "text": "node -v\nnpm -v\ngit --version\n"
-                    }
-                ]
-            }
-        ]
     },
     {
         "label": "ZOOM",
         "commands": [
             {
                 "label": "Zoom In",
-                "description": "",
                 "icon": "zoom-in",
                 "command": "runCommand",
                 "arguments": ["editor.action.fontZoomIn"]
-            },
-            {
-                "label": "Zoom Out",
-                "description": "",
-                "icon": "zoom-out",
-                "command": "runCommand",
-                "arguments": ["editor.action.fontZoomOut"]
-            }
-        ]
-    },
-    {
-        "label": "Insert",
-        "description": "",
-        "icon": "find-replace",
-        "command": "insertNewCode",
-        "arguments": ["ui/components/tableItem.ts", "<td className=\"col-date-time\">", "<div className=\"WOW\"></div>", "before"]
-    },
-    {
-        "label": "Replace",
-        "description": "",
-        "icon": "find-replace",
-        "command": "insertNewCode",
-        "arguments": [
-            "package.json",
-            "\"webpack\": \"node --max-old-space-size=4096",
-            "\"webpack\": \"node --max-old-space-size=8192",
-            "replace"
-        ]
-    },
-    {
-        "label": "Snippet ➜ console.log(*!!!* ➜)",
-        "description": "",
-        "icon": "code",
-        "command": "runCommand",
-        "arguments": [
-            "editor.action.insertSnippet",
-            {
-                "snippet": "console.log('***** !!! ***** ${1| ,this.props,this.state,props|} ----->', $1);"
             }
         ]
     }
 ]
 ```
 
-
-
 ## Release Notes
 
-### 1.4.1 | 2023/03/30
-- Fixed Error.
+### 1.4.5 | 2026/06/07
+- Fixed empty lines being inserted in settings.json when opening settings from the panel toolbar.
 
-More information in the [changelog](CHANGELOG.md "Changelog")
+More information in the [changelog](CHANGELOG.md).
 
 ---
 
 ## Original Extension
 
 This extension is a fork of the original [Favorites Panel](https://github.com/sabitovvt/vscode-favorites-panel) extension developed by [Vladimir Sabitov](https://github.com/sabitovvt). All credits for the original idea and core implementation go to the original author.
-
